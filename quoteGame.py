@@ -3,22 +3,17 @@ from bs4 import BeautifulSoup
 from time import sleep
 from random import choice
 
-
 base_url = "http://quotes.toscrape.com"
-
 
 def scrape_quotes():
 	all_quotes = []
 	url = "/page/1"
-
 
 	while url:
 
 		res = requests.get(f"{base_url}{url}")
 		soup = BeautifulSoup(res.text, "html.parser")
 		quotes = soup.find_all(class_="quote")
-
-
 
 		for quote in quotes:
 			all_quotes.append({
@@ -34,11 +29,8 @@ def scrape_quotes():
 
 def start_game(quotes):
 
-
-
 	quote = choice(quotes)
 	remaining_guesses = 4
-
 
 	print("Here's a quote: ")
 	print(quote["text"])
@@ -67,7 +59,6 @@ def start_game(quotes):
 			print(f"Here's a hint: The author's last name starts with: {last_initial}")	
 		else:
 			print(f"Sorry, you ran out of guesses.  The answer was {quote['author']}")
-
 
 	again = ''
 	while again.lower() not in ('y', 'yes', 'n', 'no'):
